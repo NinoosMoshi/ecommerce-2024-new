@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ninos.model.dto.JwtAuthResponse;
+import com.ninos.model.dto.LoginDTO;
 import com.ninos.model.dto.RegisterDTO;
 import com.ninos.service.auth.AuthService;
 
@@ -23,6 +25,13 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO){
         String response = authService.register(registerDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDTO loginDTO){
+        JwtAuthResponse jwtAuthResponse = authService.login(loginDTO);
+        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
     }
 
 
